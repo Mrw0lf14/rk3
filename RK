@@ -44,5 +44,6 @@ int main()
     }
     delete_list_nodes_event_nums(&head);
     show(head);
+    free(head);
     return 0;
 }
