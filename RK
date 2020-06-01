@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct tnode{
+    struct tnode *next;
+    int data;
+};
+void push(struct tnode **head, int data){
+    struct tnode *tp = (struct tnode*)malloc(sizeof(struct tnode));
+    tp->data = data;
+    tp->next = *head;
+    *head = tp;
+}
+void delete_list_nodes_event_nums(struct tnode **head){
+    struct tnode *tp = *head;
+    struct tnode *prv = NULL;
+    while(tp!=NULL){
+        if(tp->data%2 == 0){
+            if(tp == *head){
+                *head = tp->next;
+            }
+            else{
+                prv->next = tp->next;
+            }
+        }
+        prv = tp;
+        tp = tp->next;
+    }
+}
+void show(struct tnode *head){
+    struct tnode* tp = head;
+    while(tp!=NULL){
+        printf("%d\n", tp->data);
+        tp = tp->next;
+    }
+}
+int main()
+{
+    struct tnode* head = NULL;
+    int n, t;
+    scanf("%d", &n);
+    for(int i = 0; i<n; i++){
+        scanf("%d", &t);
+        push(&head, t);
+    }
+    delete_list_nodes_event_nums(&head);
+    show(head);
+    return 0;
+}
